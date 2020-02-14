@@ -1,40 +1,45 @@
 <template>
   <div id="home">
-    <nav-bar>
-      <template v-slot:nav-left></template>
-      <template v-slot:nav-conter>蘑菇</template>
-      <template v-slot:nav-right></template>
+    <nav-bar :style="navStyle">
+      <template v-slot:nav-center>购物街</template>
     </nav-bar>
-    <swiper>
-
-    </swiper>
+    <home-swiper :banners="banners"></home-swiper>
+    <home-recommend-view :recommends="recommends.list"></home-recommend-view>
   </div>
 </template>
 
 <script>
   import NavBar from "components/common/navbar/NavBar";
-  import { getHomeMulidata } from "network/home";
-  import Swiper from "components/common/swiper/Swiper"
-  import SwiperItem from "../../components/common/swiper/SwiperItem";
+  import HomeSwiper from "./childComponts/HomeSwiper";
+  import HomeRecommendView from "./childComponts/HomeRecommendView";
 
+  import { getHomeMulidata } from "network/home";
   export default {
     name: "Home",
     components: {
       NavBar,
-      Swiper,
-      SwiperItem
+      HomeSwiper,
+      HomeRecommendView,
     },
     data() {
       return {
         banners: [],
-        recommends: []
+        recommends: [],
+        navStyle: {
+          background: "#ff5777",
+          color: "white"
+        }
       }
     },
     created() {
-      getHomeMulidata().then( res => {
-        console.log(res);
-        this.result = res;
+      getHomeMulidata()
+        .then( res => {
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend;
       })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 </script>

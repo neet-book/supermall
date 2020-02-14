@@ -1,8 +1,8 @@
 <template>
   <div id="hy-swiper"
-       @touchstart.prevent="touchStart"
+       @touchstart="touchStart"
        @touchmove.prevent="touchMove"
-       @touchend.prevent="touchEnd"
+       @touchend="touchEnd"
   >
     <div class="swiper">
       <slot></slot>
@@ -39,7 +39,7 @@
       // 滚动间隔(毫秒)
       interval: {
         type: Number,
-        default: 3000
+        default: 2000
       },
       // 滚动动画持续时间
       animeDuration: {
@@ -49,7 +49,7 @@
       // 手动切换轮播图移动比例
       moveRatio: {
         type: Number,
-        default: 0.5
+        default: 0.28
       },
       // 是否显示提示
       showIndicator: {
@@ -147,8 +147,6 @@
       },
       // 处理拖动事件
       touchStart(event) {
-        console.log(event);
-
         if(this.scrolling) return;
         // 停止定时器
         this.stopTimer();
@@ -171,6 +169,8 @@
         } else if (this.distance > 0 &&
           moveDistance > this.totalWidth * this.moveRatio) {
           this.currentIndex--;
+        } else if (this.distance === 0) {
+          return;
         }
         // 移动到正确位置
         this.scrollContent(-this.currentIndex * this.totalWidth);

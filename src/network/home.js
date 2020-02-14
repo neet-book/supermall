@@ -2,6 +2,6 @@ import {request} from "./request";
 
 export function getHomeMulidata() {
   return request({
-    url: '/home/muiltdate'
+    url: '/home/multidata'
   });
 }

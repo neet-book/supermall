@@ -60,10 +60,10 @@
     flex: 1;
     height: 49px;
     background: #f6f6f6;
-    font-size: 14px;
+    font-size: 12px;
   }
   .tab-bar-item img {
-    margin-top: 3px;
+    margin: 3px 0 3px 0;
     width: 20px;
 
     vertical-align: middle;
