@@ -21,6 +21,7 @@
 <style scoped>
   .nav-bar {
     display: flex;
+    width: 100%;
     line-height: 44px;
     height: 44px;
   }
