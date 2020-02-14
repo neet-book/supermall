@@ -2,10 +2,12 @@
   <div id="home">
     <nav-bar>
       <template v-slot:nav-left></template>
-      <template v-slot:nav-conter></template>
+      <template v-slot:nav-conter>蘑菇</template>
       <template v-slot:nav-right></template>
     </nav-bar>
-    <swiper></swiper>
+    <swiper>
+
+    </swiper>
   </div>
 </template>
 
@@ -13,12 +15,14 @@
   import NavBar from "components/common/navbar/NavBar";
   import { getHomeMulidata } from "network/home";
   import Swiper from "components/common/swiper/Swiper"
+  import SwiperItem from "../../components/common/swiper/SwiperItem";
 
   export default {
     name: "Home",
     components: {
       NavBar,
-      Swiper
+      Swiper,
+      SwiperItem
     },
     data() {
       return {
