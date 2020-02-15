@@ -19,6 +19,7 @@
     bottom: 0;
     right: 0;
 
+    background: var(--color-background);
     box-shadow: 0 -2px 1px rgba( 100, 100, 100, 0.1);
   }
 </style>

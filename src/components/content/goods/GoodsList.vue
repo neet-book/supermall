@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <goos-list-item v-for="item of goods" :goods-item="item" :key="item.iid"></goos-list-item>
+    <goos-list-item v-for="(item, index) of goods" :goods-item="item" :key="index"></goos-list-item>
   </div>
 </template>
 
