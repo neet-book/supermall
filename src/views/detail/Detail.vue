@@ -2,7 +2,7 @@
   <div id="detail">
     <detail-nav-bar></detail-nav-bar>
     <detail-swiper :top-images="topImages"></detail-swiper>
-
+    <goods-info :goods="goods"></goods-info>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   import DetailSwiper from "./childComponents/DetailSwiper";
   import GoodsInfo from "./childComponents/GoodsInfo";
 
-  import { getDetail, Goods } from "../../network/detail";
+  import { getDetail, Goods, Shop } from "../../network/detail";
 
   export default {
     name: "Detail",
@@ -25,7 +25,8 @@
         // 数据
         iid: "",
         topImages: [],
-        goods: null,
+        goods: {},
+        shop: {}
       }
     },
     created() {
@@ -42,7 +43,9 @@
             this.topImages = data.itemInfo.topImages;
             // 商品信息
             this.goods = new Goods(data.columns, data.itemInfo, data.shopInfo);
-            console.log(this.goods);
+            // 店家信息
+            this.shop = new Shop(data.shopInfo);
+            console.log(this.shop);
           });
       }
     }

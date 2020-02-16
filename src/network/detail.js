@@ -17,7 +17,19 @@ export class Goods {
     this.oldPrice = itemInfo.oldPrice;
     this.discount = itemInfo.discountDesc;
     this.columns = columns;
-    this.servers = shopInfo.services;
+    this.services = shopInfo.services;
     this.realPrice = itemInfo.lowNowPrice;
+  }
+}
+
+export class Shop {
+  constructor(shop) {
+    this.name = shop.name;
+    this.logo = shop.shopLogo;
+    this.fans = shop.cFans;
+    this.sells = shop.cSells;
+    this.score = shop.score;
+    this.goodsCounts = shop.cGoods;
+
   }
 }
