@@ -4,7 +4,8 @@
        @touchmove.prevent="touchMove"
        @touchend="touchEnd"
   >
-    <div class="swiper">
+    <!--图片-->
+    <div class="swiper" ref="swiper">
       <slot></slot>
     </div>
     <div class="indicator" >
@@ -51,8 +52,14 @@
         type: Number,
         default: 0.28
       },
+      // banner数量
+      itemCount: Number,
       // 是否显示提示
       showIndicator: {
+        type: Boolean,
+        default: true
+      },
+      autoSwiper: {
         type: Boolean,
         default: true
       }
@@ -64,8 +71,8 @@
         this.handleDom();
 
         // 开启定时器
-        this.startTimer();
-      }, 100);
+        if (this.autoSwiper) this.startTimer();
+      }, 500);
     },
     methods: {
 
@@ -127,9 +134,17 @@
 
       // 操作DOM
       handleDom() {
-        let swiperEL = document.querySelector('.swiper');
-        let slidesEL = document.querySelectorAll('.slide');
+        let swiperEL = this.$refs.swiper
+        let slidesEL = swiperEL.children;
         this.slideCount = slidesEL.length;
+
+        // 检查slide是否加载完毕
+        if (this.slideCount !== this.itemCount) {
+          setTimeout( () => {
+            this.handleDom();
+          }, 300);
+          return;
+        }
 
         // 如果轮播图数量大于1就在前后再插入一张轮播图
         if (this.slideCount > 1) {
@@ -137,7 +152,8 @@
           let cloneLast = slidesEL[this.slideCount -1].cloneNode(true);
           swiperEL.insertBefore(cloneLast, slidesEL[0]);
           swiperEL.appendChild(cloneFiest);
-          console
+
+          // 获取总宽度和样式对象
           this.totalWidth = swiperEL.offsetWidth;
           this.swiperStyle = swiperEL.style;
 

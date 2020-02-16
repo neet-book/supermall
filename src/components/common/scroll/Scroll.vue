@@ -32,35 +32,36 @@
     },
     mounted() {
       // 配置滚动
-      this.$nextTick(() => {
-        this.setScroll(this.$props);
-      });
+      setTimeout(() => {
+        this._initScroll(this.$props);
+      }, 30);
     },
     methods: {
       // 设置滚动
-      setScroll(config) {
-        // console.log(config);
+      _initScroll(config) {
         this.scroll = new BetterScroll(this.$refs.wrapper, config);
 
         // 抛出事件
         // 上拉
-        this.scroll.on('pullingUp', () => {
-          // console.log('ex')
-          this.$emit('pulling-up', this.scroll);
-        });
+        if (this.pullUpLoad) {
+          this.scroll.on('pullingUp', () => {
+            this.$emit('pullingUp', this.scroll);
+          });
+        }
 
         // 滚动
-        this.scroll.on('scroll', position => {
-          // console.log(position);
-          this.$emit('scroll', position);
-        });
+        if (this.probeType) {
+          this.scroll.on('scroll', position => {
+            this.$emit('scroll', position);
+          });
+        }
 
         // 下拉
-        this.scroll.on('pullingDown', () => {
-          this.$emit('pulling-down', this.scroll);
-        });
-
-        setTimeout(()=> this.scroll.refresh(), 300);
+        if (this.pullDownRefresh) {
+          this.scroll.on('pullingDown', () => {
+            this.$emit('pullingDown', this.scroll);
+          });
+        }
       },
 
       // 回到顶部

@@ -1,15 +1,15 @@
 <template>
   <div class="goods">
-    <goos-list-item v-for="(item, index) of goods" :goods-item="item" :key="index"></goos-list-item>
+    <goods-list-item v-for="(item, index) of goods" :goods-item="item" :key="index"></goods-list-item>
   </div>
 </template>
 
 <script>
-  import GoosListItem from "./GoosListItem";
+  import GoodsListItem from "./GoodsListItem";
   export default {
     name: "GoodsList",
     components: {
-      GoosListItem
+      GoodsListItem
     },
     props: {
       goods: {

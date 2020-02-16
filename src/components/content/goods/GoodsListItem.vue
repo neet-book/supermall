@@ -1,13 +1,11 @@
 <template>
-  <div class="good-item">
-    <a :href="goodsItem.link">
-      <img :src="goodsItem.show.img">
-      <div class="item-info">
-        <p>{{ goodsItem.title }}</p>
-        <span class="price"> {{ goodsItem.price}} ¥</span>
-        <span class="colle"> {{ goodsItem.cfav }}</span>
+  <div class="good-item" @click="goTo()">
+    <img :src="goodsItem.show.img">
+    <div class="item-info">
+      <p>{{ goodsItem.title }}</p>
+      <span class="price"> {{ goodsItem.price}} ¥</span>
+      <span class="colle"> {{ goodsItem.cfav }}</span>
       </div>
-    </a>
   </div>
 </template>
 
@@ -20,6 +18,11 @@
         default() {
           return {}
         }
+      }
+    },
+    methods: {
+      goTo() {
+        this.$router.push('/detail/' + this.goodsItem.iid);
       }
     }
   }

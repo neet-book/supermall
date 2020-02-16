@@ -1,8 +1,8 @@
 <template>
-  <swiper>
+  <swiper :itemCount="banners.length">
     <swiper-item v-for="(banner, index) of banners" :key="index">
       <a :href="banner.link">
-        <img :src="banner.image" :alt="banner.title">
+        <img :src="banner.image" :alt="banner.title" @load="$emit('imageLoaded')">
       </a>
     </swiper-item>
   </swiper>

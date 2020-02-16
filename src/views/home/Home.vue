@@ -1,23 +1,37 @@
 <template>
   <div id="home">
+    <!-- 导航 -->
     <nav-bar id="nav-bar">
-      <template v-slot:nav-center>购物街</template>
+      <template v-slot:center>购物街</template>
     </nav-bar>
+    <!-- 吸顶时显示 -->
+    <tab-control
+      :titles="['流行', '新款', '精选']"
+      ref="tabControl2"
+      @tab-click="changeList"
+      :class="{ 'fixed': isTabFixed }"
+      v-show="isTabFixed"
+    ></tab-control>
     <scroll
       class="content"
       ref="scroll"
       v-bind="{ probeType: 3, pullUpLoad: true }"
       @scroll="scrolling"
-      @pulling-up="pullUpdate"
+      @pullingUp="pullUpdate"
     >
-      <home-swiper :banners="banners"></home-swiper>
-      <home-recommend-view :recommends="recommends.list"></home-recommend-view>
+      <!-- 轮播图 -->
+      <home-swiper :banners="banners" @imageLoaded.once="swiperImageLoaded"></home-swiper>
+      <!-- 推荐 -->
+      <home-recommend-view :recommends="recommends"></home-recommend-view>
       <feature-view></feature-view>
+      <!-- 主题切换 -->
       <tab-control
         :titles="['流行', '新款', '精选']"
-        class="tab-control"
+        ref="tabControl1"
         @tab-click="changeList"
+
       ></tab-control>
+      <!-- 商品列表 -->
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
@@ -61,17 +75,24 @@
           new: {page: 0, list: []},
           shell: {page: 0, list: []}
         },
-
+        tabControlOffset: 0,
+        positionY: 0,
         // 状态
         currentType: 'pop',
-        isShowBackTop: false
+        isShowBackTop: false,
+        isTabFixed: false,
       }
     },
+
+    // 展示商品类型
     computed: {
       showGoods() {
         return this.goods[this.currentType].list;
       },
     },
+    // activated() {
+    //   this.backTo(this.positionY);
+    // },
     created() {
       // 在组件创建后进行第一次数据请求
      this.getHomeMultidata();
@@ -85,8 +106,9 @@
       /**
        *  事件监听
        */
-      changeList(event) {
-        switch (event) {
+      // control bar 点击
+      changeList(index) {
+        switch (index) {
           case 0:
             this.currentType = 'pop';
             break;
@@ -97,9 +119,21 @@
             this.currentType = 'shell';
             break;
         }
+
+        this.$refs.tabControl1.currentIndex = index;
+        this.$refs.tabControl2.currentIndex = index;
       },
+
+      // 滚动
       scrolling(event) {
         this.isShowBackTop = -event.y > 1500;
+        this.isTabFixed = -event.y > this.tabControlOffset;
+        if(event.y) this.positionY = event.y;
+      },
+
+      // swiper图片加载
+      swiperImageLoaded() {
+        this.tabControlOffset = this.$refs.tabControl1.$el.offsetTop
       },
       /**
        *  网络请求
@@ -129,12 +163,12 @@
         this.getHomeGoods(this.currentType)
           .then(() => {
             // 告诉scroll数据加载已经结束,设置延时，防止用户重复下拉
-            setTimeout(() => scroll.finishPullUp(), 1000);
+            setTimeout(() => scroll.finishPullUp(), 500);
             scroll.refresh();
           })
         .catch(e => {
           console.log(e);
-          setTimeout(() => scroll.finishPullUp(), 1000);
+          setTimeout(() => scroll.finishPullUp(), 500);
         })
       },
       /**
@@ -144,6 +178,14 @@
       toTop() {
         this.$refs.scroll.goTo(0, 0);
         this.isShowBackTop = false;
+      },
+
+      // 回到离开时的位置
+      backTo(y) {
+        if (this.$refs.scroll.scroll) {
+          this.$refs.scroll.goTo(0, y, 0);
+          this.$refs.scroll.scroll.refresh();
+        }
       }
     }
   }
@@ -158,11 +200,11 @@
     background: #ff5777;
     color: white;
 
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 9;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*left: 0;*/
+    /*z-index: 9;*/
   }
   .tab-control {
     /*position: sticky;*/
@@ -182,9 +224,18 @@
     -webkit-overflow-scrolling: touch;
   }
 
-    .back-top {
-      position: fixed;
-      right: 15px;
-      bottom: 60px;
-    }
+  .back-top {
+    position: fixed;
+    right: 15px;
+    bottom: 60px;
+  }
+
+  .fixed {
+    position: fixed;
+    top: 43px;
+    left: 0;
+    right: 0;
+
+    box-shadow: 0 2px 1px -2px #666666ad;
+  }
 </style>

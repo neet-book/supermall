@@ -20,7 +20,8 @@
           return [];
         }
       }
-    }
+    },
+
   }
 </script>
 
@@ -33,16 +34,19 @@
     font-size: 12px;
   }
   .recommend-item a {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
-  .recommend-item img, p {
-    width: 80%;
-    text-align: center;
-    text-align: center;
+  .recommend-item img{
+    width: 85%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .recommend-item p {
-
+    text-align: center;
   }
+
 </style>
