@@ -30,6 +30,5 @@ export class Shop {
     this.sells = shop.cSells;
     this.score = shop.score;
     this.goodsCounts = shop.cGoods;
-
   }
 }

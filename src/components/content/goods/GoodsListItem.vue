@@ -1,6 +1,6 @@
 <template>
   <div class="good-item" @click="goTo()">
-    <img :src="goodsItem.show.img">
+    <img :src="showImg">
     <div class="item-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price"> {{ goodsItem.price}} ¥</span>
@@ -18,6 +18,11 @@
         default() {
           return {}
         }
+      }
+    },
+    computed: {
+      showImg() {
+        return this.goodsItem.show.img ? this.goodsItem.show.img : "~assets/img/common/placeholder.png";
       }
     },
     methods: {
