@@ -124,6 +124,7 @@
 
   .btn {
     text-align: center;
+    padding:20px 0;
   }
 
   .btn button {
