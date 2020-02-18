@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-goods-info">
+  <div class="detail-goods-info" v-if="Object.keys(detailInfo.length > 0)">
     <!--   描述  -->
     <div class="info-desc">
       <div class="start"></div>
@@ -36,6 +36,7 @@
 <style scoped>
   .detail-goods-info {
     border-top: 5px #e6e6e669 solid;
+    padding-bottom: 20px;
   }
   .info-desc {
     padding: 15px 10px;

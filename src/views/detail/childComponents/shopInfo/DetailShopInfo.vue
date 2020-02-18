@@ -47,6 +47,7 @@
   }
   .logo {
     width: 50px;
+    height: 50px;
     border: 1px solid rgba(209, 209, 209, 0.57);
     border-radius: 50%;
     overflow: hidden;
