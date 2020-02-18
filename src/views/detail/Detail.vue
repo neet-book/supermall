@@ -8,6 +8,7 @@
       <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
       <detail-param-info :detail-params="paramsInfo"></detail-param-info>
       <detail-comment-info :detail-comments="commentInfo"></detail-comment-info>
+      <goods-list :goods="recommentdGoods"></goods-list>
     </scroll>
 
 
@@ -26,10 +27,12 @@
 
   import { getDetail, Goods, Shop } from "../../network/detail";
   import DetailParamInfo from "./childComponents/DetailParamInfo";
+  import GoodsList from "../../components/content/goods/GoodsList";
 
   export default {
     name: "Detail",
     components: {
+      GoodsList,
       DetailParamInfo,
       DetailGoodsInfo,
       DetailNavBar,
