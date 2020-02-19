@@ -32,9 +32,7 @@
     },
     mounted() {
       // 配置滚动
-      setTimeout(() => {
         this._initScroll(this.$props);
-      }, 30);
     },
     methods: {
       // 设置滚动
@@ -64,7 +62,7 @@
         }
       },
 
-      // 回到顶部
+      // 前往指定位置
       goTo(x, y, time = 300) {
         this.scroll.scrollTo(x, y, time);
       }

@@ -33,6 +33,9 @@
 </script>
 
 <style scoped>
+  .detail-comment-info {
+    padding-bottom: 20px;
+  }
   .tab {
     height: 43px;
     border-bottom: rgba(223, 223, 223, 0.6)1px solid;

@@ -22,7 +22,13 @@
     },
     computed: {
       showImg() {
-        return this.goodsItem.show.img ? this.goodsItem.show.img : "~assets/img/common/placeholder.png";
+        if (this.goodsItem.show) {
+          return this.goodsItem.show.img;
+        } else if ( this.goodsItem) {
+          return this.goodsItem.image;
+        } else {
+          return '~asset/img/comment/placeholder.png'
+        }
       }
     },
     methods: {

@@ -12,7 +12,7 @@
            v-for="(title, index) of titles"
            :key="title"
            class="title"
-           :class="{ active: activeIndex === index }"
+           :class="{ active: currentIndex === index }"
            @click="clickItem(index)"
          > {{ title }}</p>
        </div>
@@ -28,23 +28,23 @@
     components: {
       NavBar
     },
-    data() {
-      return {
-        activeIndex: 0,
-      }
-    },
     props: {
       titles: {
         type: Array,
         default() {
           return ['商品', '参数', '评论', '推荐'];
         }
+      },
+      currentIndex : {
+        type: Number,
+        default: 0
       }
     },
     methods: {
       // 事件
       clickItem(index) {
-        this.activeIndex = index;
+        this.$emit('update:currentIndex', index);
+        this.$emit('clickItem', index);
       },
 
       backLastPage() {

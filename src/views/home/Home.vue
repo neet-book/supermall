@@ -79,7 +79,6 @@
         positionY: 0,
         // 状态
         currentType: 'pop',
-        isShowBackTop: false,
         isTabFixed: false,
       }
     },
