@@ -47,9 +47,9 @@
   import HomeSwiper from "./childComponts/HomeSwiper";
   import HomeRecommendView from "./childComponts/HomeRecommendView";
   import FeatureView from "./childComponts/FeatureView";
-  import BackTop from "components/content/backTop/BackTop";
 
   import { getHomeMultidata, getHomeGoods } from "network/home";
+  import { backTopMixin } from "../../common/mixin";
 
   export default {
     name: "Home",
@@ -62,7 +62,6 @@
       HomeSwiper,
       HomeRecommendView,
       FeatureView,
-      BackTop
     },
     data() {
       return {
@@ -82,7 +81,7 @@
         isTabFixed: false,
       }
     },
-
+    mixins: [backTopMixin],
     // 展示商品类型
     computed: {
       showGoods() {

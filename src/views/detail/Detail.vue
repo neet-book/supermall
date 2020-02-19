@@ -13,7 +13,7 @@
       <detail-comment-info :detail-comments="commentInfo" ref="commentInfo"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @add-to-cart="addToCart"></detail-bottom-bar>
     <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
   </div>
 </template>
@@ -30,7 +30,6 @@
 
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
-  import BackTop from "components/content/backTop/BackTop";
 
   import { getDetail, getRecommend, Goods, Shop } from "../../network/detail";
   import { backTopMixin } from "../../common/mixin";
@@ -49,7 +48,6 @@
       DetailShopInfo,
       DetailCommentInfo,
 
-      BackTop,
       Scroll,
     },
 
@@ -150,9 +148,8 @@
         }
       },
       /**
-       *  其他
+       *  获取数据
        */
-
       getPositions() {
         if (this.$refs.paramsInfo) {
           this.positions.paramsInfo = this.$refs.paramsInfo.$el.offsetTop;
@@ -165,6 +162,22 @@
         if (this.$refs.recommend) {
           this.positions.recommend = this.$refs.recommend.$el.offsetTop;
         }
+      },
+      /**
+       *  行为
+       */
+      addToCart() {
+        // 整理商品信息
+        const product = {
+          iid: this.iid,
+          image: this.topImages[0],
+          title: this.goodsInfo.title,
+          desc: this.goodsInfo.desc,
+          price: this.goodsInfo.realPrice,
+          count: 1
+        };
+        // 添加商品
+        this.$store.dispatch("addProduceInCart", product);
       }
     }
   }

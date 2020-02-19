@@ -21,14 +21,23 @@
       </div>
     </div>
     <div class="right">
-    <button class="shopping-car">加入购物车</button><button class="buy">购买</button>
+    <button class="shopping-car" @click.prevent="addToCart">加入购物车</button>
+    <button class="buy" @click="buyGoods">购买</button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "DetailBottomBar"
+    name: "DetailBottomBar",
+    methods: {
+      addToCart(event) {
+        this.$emit('add-to-cart', event )
+      },
+      buyGoods() {
+
+      }
+    }
   }
 </script>
 
