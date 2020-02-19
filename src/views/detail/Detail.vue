@@ -14,6 +14,7 @@
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
     <detail-bottom-bar></detail-bottom-bar>
+    <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -29,10 +30,10 @@
 
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
+  import BackTop from "components/content/backTop/BackTop";
 
   import { getDetail, getRecommend, Goods, Shop } from "../../network/detail";
-
-
+  import { backTopMixin } from "../../common/mixin";
 
 
   export default {
@@ -48,8 +49,12 @@
       DetailShopInfo,
       DetailCommentInfo,
 
-      Scroll
+      BackTop,
+      Scroll,
     },
+
+    // 混入
+    mixins: [backTopMixin],
     data() {
       return {
         // 数据
@@ -123,6 +128,8 @@
         } else {
           this.currentIndex = 0;
         }
+
+        this.isShowBackTop = -position.y > 1500;
       },
 
       onNavBarClick(index) {
@@ -175,5 +182,11 @@
   .detail-scroll {
     height: calc(100% - 44px - 49px);
     overflow: hidden;
+  }
+
+  .back-top {
+    position: fixed;
+    right: 15px;
+    bottom: 60px;
   }
 </style>
