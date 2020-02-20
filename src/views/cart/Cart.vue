@@ -46,7 +46,7 @@
     overflow: hidden;
   }
 
-  .bottom-bar {
+  .bottom-bar, .ignore{
     position: fixed;
     bottom: 49px;
     left: 0;

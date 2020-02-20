@@ -14,7 +14,7 @@
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
     <detail-bottom-bar @add-to-cart="addToCart" class="bottom-bar"></detail-bottom-bar>
-    <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
+    <back-top class="back-top " @click.native="toTop" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
