@@ -28,7 +28,6 @@
     },
     methods: {
       changeAllChecked() {
-        console.log(this.isAllChecked);
         this.$store.commit(CHANGE_ALL_CHECKED, !this.isAllChecked);
       }
     }
