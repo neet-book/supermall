@@ -88,9 +88,9 @@
         return this.goods[this.currentType].list;
       },
     },
-    // activated() {
-    //   this.backTo(this.positionY);
-    // },
+    activated() {
+      this.backTo(this.positionY);
+    },
     created() {
       // 在组件创建后进行第一次数据请求
      this.getHomeMultidata();
@@ -153,7 +153,9 @@
             this.goods[type].list.push(...list);
 
             this.goods[type].page++;
-          });
+          }).catch(e => {
+            console.log('加载图片出错: ', e)
+          })
       },
 
       // 下拉更新
@@ -198,14 +200,8 @@
     background: #ff5777;
     color: white;
 
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*right: 0;*/
-    /*left: 0;*/
-    /*z-index: 9;*/
   }
   .tab-control {
-    /*position: sticky;*/
     top: 44px;
     background: var(--color-background);
     z-index: 9;

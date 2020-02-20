@@ -7,7 +7,7 @@
       <cart-list></cart-list>
     </scroll>
     <!--  汇总  -->
-    <CartBottomBar></CartBottomBar>
+    <CartBottomBar class="bottom-bar"></CartBottomBar>
   </div>
 </template>
 
@@ -44,5 +44,12 @@
   .content {
     height: calc(100% - 82px - 49px);
     overflow: hidden;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 </style>

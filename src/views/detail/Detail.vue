@@ -13,7 +13,7 @@
       <detail-comment-info :detail-comments="commentInfo" ref="commentInfo"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
-    <detail-bottom-bar @add-to-cart="addToCart"></detail-bottom-bar>
+    <detail-bottom-bar @add-to-cart="addToCart" class="bottom-bar"></detail-bottom-bar>
     <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
   </div>
 </template>
@@ -210,5 +210,12 @@
     position: fixed;
     right: 15px;
     bottom: 60px;
+  }
+  .bottom-bar {
+    /* 解决safari移动端问题*/
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
   }
 </style>

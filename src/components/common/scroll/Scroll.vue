@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" ref="wrapper">
-    <div class="content">
+    <div class="content" ref="content">
       <slot></slot>
     </div>
   </div>
@@ -37,6 +37,17 @@
     methods: {
       // 设置滚动
       _initScroll(config) {
+        // 浏览器检测
+
+        let agents = ["iphone", "ipad"];
+        let userAgent = navigator.userAgent.toLowerCase();
+        let isIOS = agents.some(item => {
+          return userAgent.includes(item);
+        });
+
+        // 解决抖动问题
+        if (isIOS) config.useTransition = false;
+
         this.scroll = new BetterScroll(this.$refs.wrapper, config);
 
         // 抛出事件
@@ -65,7 +76,8 @@
       // 前往指定位置
       goTo(x, y, time = 300) {
         this.scroll.scrollTo(x, y, time);
-      }
+      },
+
     }
   }
 </script>
