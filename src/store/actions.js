@@ -1,6 +1,7 @@
 import {ADD_PRODUCT, ADD_PRODUCT_COUNT} from "./mutaition.type";
 
 export default {
+  // 添加商品到购物车
   addProduceInCart({state, commit}, product) {
     let iid = product.iid;
     let index = 0;

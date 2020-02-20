@@ -15,6 +15,7 @@
     </scroll>
     <detail-bottom-bar @add-to-cart="addToCart"></detail-bottom-bar>
     <back-top class="back-top" @click.native="toTop" v-show="isShowBackTop"></back-top>
+    <div class="succeed" v-show="showSucceed">添加成功！</div>
   </div>
 </template>
 
@@ -66,6 +67,7 @@
         recommends: [],  // 推荐
         // 状态
         currentIndex: 0,
+        showSucceed: false,
         // 组件位置
         positions: {},
       }
@@ -174,10 +176,17 @@
           title: this.goodsInfo.title,
           desc: this.goodsInfo.desc,
           price: this.goodsInfo.realPrice,
+          checked: true,
           count: 1
         };
         // 添加商品
         this.$store.dispatch("addProduceInCart", product);
+
+        // 显示提示
+        this.showSucceed = true;
+        setTimeout(() => {
+          this.showSucceed = false;
+        }, 1000);
       }
     }
   }
@@ -201,5 +210,23 @@
     position: fixed;
     right: 15px;
     bottom: 60px;
+  }
+
+  .succeed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 150px;
+    height: 50px;
+
+    color: black;
+    text-align: center;
+    line-height: 50px;
+
+    box-shadow: 0 0 4px -1px #000;
+    border-radius: 10px;
+    background: #9e9e9e87;
   }
 </style>

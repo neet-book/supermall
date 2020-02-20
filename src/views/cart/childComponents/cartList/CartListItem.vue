@@ -1,6 +1,6 @@
 <template>
   <div class="cart-list-item">
-    <div class="choose" :class="{'is-choose': isChoose}" @click="onChoose"></div>
+    <check-button @click.native="changeChecked" :isChecked="product.checked"></check-button>
     <div class="product-img">
       <img :src="product.image" alt="product">
     </div>
@@ -16,8 +16,12 @@
 </template>
 
 <script>
+  import { CHANGE_CHECKED } from "@/store/mutaition.type";
+  import CheckButton from "components/content/checkButton/CheckButton";
+
   export default {
     name: "CartListItem",
+    components: {CheckButton},
     data() {
       return {
         isChoose: true
@@ -32,12 +36,8 @@
       }
     },
     methods: {
-      onChoose() {
-        this.isChoose = !this.isChoose;
-        this.$emit('product-choose', {
-          iid: this.product.iid,
-          isChoose: this.isChoose
-        })
+      changeChecked() {
+        this.$store.commit(CHANGE_CHECKED, this.product.iid);
       }
     }
   }
@@ -94,19 +94,5 @@
   .price-container span:first-child {
     color: darkorange;
   }
-  .choose {
-    width: 18px;
-    height: 18px;
-    margin: 5px;
-    border-radius: 50%;
 
-    background-color: rgba(255, 91, 135, 0.75);
-  }
-  .is-choose {
-    background-image: url("~assets/img/cart/tick.svg");
-    background-size: 12px 12px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #ff6580;
-  }
 </style>
